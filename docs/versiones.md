@@ -20,6 +20,12 @@ Revisión: 17-10-2026, antes de instalar las dependencias. Se consultó document
 | Docker Compose | plugin v2+ | [Modelo Compose](https://docs.docker.com/compose/intro/compose-application-model/); usa `docker compose`, healthcheck y `up --wait`. |
 | GitHub Actions | checkout v6, setup-node v6, pnpm/action-setup v4 | [Guía Node](https://docs.github.com/en/actions/use-cases-and-examples/building-and-testing/building-and-testing-nodejs). Acciones fijadas por SHA del tag oficial consultado. |
 
+## Compatibilidad de despliegue en Vercel
+
+La preparación para Vercel conserva Node **24.22.0** en `.nvmrc` y CI, pero declara `engines.node: "24.x"` en raíz y web: Vercel sólo selecciona versiones mayores y actualiza minor/patch automáticamente. Se consultaron [sus versiones soportadas](https://vercel.com/docs/functions/runtimes/node-js/node-js-versions). No cambia la decisión de Node 24 LTS ni las versiones de dependencias. La API sigue requiriendo las versiones mínimas de sus dependencias al instalar; no se propone usar un Node 24 antiguo.
+
+pnpm permanece fijado en **10.34.7**, usando `ENABLE_EXPERIMENTAL_COREPACK=1` en Vercel según su [documentación de builds](https://vercel.com/docs/builds/configure-a-build). Instalación automática, sin override `pnpm install` que seleccione una versión antigua del contenedor. Lockfile conservado sin cambios. Build local verificado, build remoto todavía pendiente. [Guía completa](despliegue-vercel.md).
+
 ## Configuración de lint compatible
 
 Se probó el preset completo `eslint-config-next@16.4.2` con ESLint 10 y `strict-peer-dependencies=true`. La instalación fue rechazada por peers de sus plugins import/jsx-a11y/react que sólo declaran soporte hasta ESLint 9. ESLint 9.39.5 pasó las verificaciones, pero npm lo marca sin soporte.
