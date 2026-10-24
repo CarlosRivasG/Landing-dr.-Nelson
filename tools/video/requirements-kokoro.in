@@ -1,0 +1,2 @@
+# Runtime CPU separado de la aplicación; resolver con uv pip compile --generate-hashes.
+kokoro-onnx==0.6.1

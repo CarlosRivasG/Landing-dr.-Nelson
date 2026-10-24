@@ -1,0 +1,33 @@
+{
+  "name": "software-odontologos",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.34.7",
+  "engines": { "node": "24.22.0", "pnpm": "10.34.7" },
+  "scripts": {
+    "dev": "pnpm --parallel --filter './apps/*' dev",
+    "dev:web": "pnpm --filter @odontologia/web dev",
+    "dev:api": "pnpm --filter @odontologia/api dev",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "test:integration": "pnpm --filter @odontologia/api test:integration",
+    "build": "pnpm -r build",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "db:up": "docker compose --env-file .env -f infra/compose.yaml up -d --wait",
+    "db:down": "docker compose --env-file .env -f infra/compose.yaml down",
+    "db:logs": "docker compose --env-file .env -f infra/compose.yaml logs -f postgres",
+    "migration:show": "pnpm --filter @odontologia/api migration:show",
+    "migration:run": "pnpm --filter @odontologia/api migration:run",
+    "migration:revert": "pnpm --filter @odontologia/api migration:revert",
+    "migration:create": "pnpm --filter @odontologia/api migration:create",
+    "migration:generate": "pnpm --filter @odontologia/api migration:generate"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.19.2",
+    "eslint": "10.13.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.71.2"
+  }
+}

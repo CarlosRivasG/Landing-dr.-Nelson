@@ -1,0 +1,11 @@
+1
+00:00:00,200 --> 00:00:03,599
+Reservas, pagos simulados, agenda y seguimiento.
+
+2
+00:00:03,599 --> 00:00:06,169
+Una demo verificada, sin cobros reales.
+
+3
+00:00:06,169 --> 00:00:08,235
+Próximo paso: guardar los datos.

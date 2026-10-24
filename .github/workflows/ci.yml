@@ -1,0 +1,64 @@
+name: Verificaciones
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      CI: 'true'
+      NEXT_TELEMETRY_DISABLED: '1'
+      POSTGRES_HOST: 127.0.0.1
+      POSTGRES_PORT: '5432'
+      POSTGRES_DB: odontologia_ci
+      POSTGRES_USER: odontologia_ci
+      POSTGRES_PASSWORD: fictional_ci_only
+    services:
+      postgres:
+        image: postgres:18.6-bookworm
+        env:
+          POSTGRES_DB: odontologia_ci
+          POSTGRES_USER: odontologia_ci
+          POSTGRES_PASSWORD: fictional_ci_only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U odontologia_ci -d odontologia_ci"
+          --health-interval 3s
+          --health-timeout 3s
+          --health-retries 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+        with:
+          version: 10.34.7
+          run_install: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+      - name: Validar Compose sin iniciar otro PostgreSQL
+        run: docker compose --env-file .env.example -f infra/compose.yaml config --quiet
+      - name: Migrar, repetir, revertir y volver a aplicar baseline
+        run: |
+          pnpm migration:run
+          pnpm migration:run
+          pnpm migration:show
+          pnpm migration:revert
+          pnpm migration:run
+      - run: pnpm test:integration
+        env:
+          NODE_ENV: test
