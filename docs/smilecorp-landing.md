@@ -1,5 +1,7 @@
 # SmileCorp / Dr. Nelson — evolución de la landing existente
 
+> Publicación elegida posteriormente: [GitHub Pages, sólo muestra estática](github-pages.md). Conserva el diseño, fotos y contacto, pero no publica reserva ni panel; los CTA de evaluación llevan a anclas informativas. El recorrido completo descrito abajo sigue disponible en el modo Next.js local normal.
+
 ## Revisión y alcance
 
 Se leyeron `spec.md`, `arquitectura.md`, README, `docs/SRS.md`, instrucciones de `apps/web/AGENTS.md`, implementación, pruebas y documentación visual. Se consultaron las guías locales de la versión instalada de Next.js sobre páginas, `searchParams` asíncronos y límites cliente.

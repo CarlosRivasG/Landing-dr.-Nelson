@@ -2,11 +2,17 @@
 
 Monorepo ejecutable con una [landing de SmileCorp / Dr. Nelson](docs/smilecorp-landing.md): negro, blanco y marfil, diseño de sonrisa, tratamientos y acceso a evaluación. Evoluciona el [prototipo visual anterior](docs/prototipo-landing.md), sin crear otro proyecto. Los recursos de banco y el 3D anteriores se conservan en el repositorio pero no se muestran como material de SmileCorp. Selección autorizada de `imagenes/` incorporada: logo, Dr. Nelson, sonrisa del hero, composición de trabajo y antes/después 2.2. Instagram, WhatsApp y dirección proporcionados por el usuario ya configurados; mapa opcional que sólo carga al pulsar “Ver mapa”. Faltan versiones fuente de mayor resolución y validación de futuras leyendas clínicas. Incluye un [recorrido de aplicación en demostración](docs/prototipo-app.md): reserva ficticia, pago simulado opcional, agenda y seguimiento administrativo. **No implementa reglas clínicas ni operación comercial real**. Existe un [SRS provisional con respuestas propuestas](docs/SRS.md) para avanzar con prototipo y datos ficticios; la aprobación del cliente sigue pendiente. Leer también [spec.md](spec.md) y [arquitectura.md](arquitectura.md), conservados en la raíz. Los árboles que proponen son ilustrativos; aquí sólo se crean carpetas con código real. No hay paquetes compartidos, PWA/offline, autenticación ni integración de pagos. Los enlaces de contacto y el mapa opcional no habilitan reservas reales.
 
-## Preparación para Vercel
+## Mostrar sólo la landing en GitHub Pages — opción actual
 
-La demo puede desplegarse desde GitHub configurando **Root Directory: `apps/web`**, framework **Next.js**, Node **24.x** y `ENABLE_EXPERIMENTAL_COREPACK=1` para pnpm 10.34.7. Se compila sólo la web; no requiere API, PostgreSQL ni credenciales de pago. **No se ha desplegado desde esta entrega.** Revisar el plan antes de publicar: Vercel Hobby no permite uso comercial.
+Se preparó una muestra estática de la **misma landing**, sin API, base de datos, calendario, panel ni pagos. Conserva fotos, navegación, FAQ, contacto y mapa opcional. Los CTA de evaluación llevan a información dentro de la página, no a rutas inexistentes. La app local completa sigue disponible por separado.
 
-[Guía paso a paso, variables, controles y límites](docs/despliegue-vercel.md). Los avisos de demostración y `noindex` se conservan. `.vercel/` y la caché local `.pnpm-store/` quedan fuera de Git.
+1. Subir los cambios a `main`.
+2. En el repositorio: **Settings → Pages → Source: GitHub Actions**.
+3. En **Actions → Mostrar landing en GitHub Pages → Run workflow**; luego compartir la URL mostrada por GitHub.
+
+No se publicó desde esta entrega ni se comprobó una URL remota. [Guía completa, alcance y condiciones de uso de Pages](docs/github-pages.md). Exportar localmente: `pnpm --filter @odontologia/web build:pages`; salida generada en `apps/web/out`, ignorada por Git.
+
+Vercel queda como alternativa no seleccionada: [guía anterior](docs/despliegue-vercel.md). Se descartó la propuesta multiservicio no confirmada; no hay configuración de servicios en la raíz ni cambios en la API. Los avisos de muestra y `noindex` se conservan.
 
 ## Explorar el prototipo funcional
 
@@ -114,7 +120,7 @@ Las futuras entidades se ubicarán en `src/modules/**/*.entity.ts`. Revisar siem
 ```sh
 pnpm lint
 pnpm typecheck
-pnpm test              # 25 pruebas sin PostgreSQL externo
+pnpm test              # 26 pruebas sin PostgreSQL externo
 pnpm build
 pnpm check             # todas las anteriores
 pnpm install --frozen-lockfile

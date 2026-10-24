@@ -7,10 +7,12 @@
     "dev": "next dev --hostname 127.0.0.1 --port 3000",
     "start": "next start --hostname 127.0.0.1 --port 3000",
     "build": "next build",
+    "build:pages": "node scripts/build-pages.mjs",
     "lint": "eslint .",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "tsx --test test/*.test.tsx",
-    "test:browser": "node scripts/check-demo-browser.mjs"
+    "test:browser": "node scripts/check-demo-browser.mjs",
+    "test:pages-browser": "node scripts/check-pages-browser.mjs"
   },
   "dependencies": {
     "next": "16.4.2",

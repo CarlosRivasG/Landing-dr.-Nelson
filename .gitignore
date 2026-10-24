@@ -2,6 +2,7 @@ node_modules/
 .pnpm-store/
 .vercel/
 .next/
+apps/web/out/
 dist/
 dist-test/
 coverage/

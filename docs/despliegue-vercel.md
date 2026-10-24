@@ -1,5 +1,7 @@
 # Publicar la demo de SmileCorp en Vercel desde GitHub
 
+> Alternativa no seleccionada actualmente. El usuario eligió mostrar sólo la landing mediante [GitHub Pages](github-pages.md), sin servicios backend. La propuesta multiservicio se descartó antes de confirmarse. Esta guía se conserva únicamente como opción futura.
+
 **Estado:** repositorio preparado; todavía no vinculado ni desplegado desde esta entrega. No hay una URL pública comprobada. No se contrató ningún servicio ni se instalaron herramientas de Vercel.
 
 ## 1. Alcance y plan

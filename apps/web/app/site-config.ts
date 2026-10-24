@@ -1,5 +1,9 @@
 // Sólo información pública. No colocar claves ni datos de pacientes aquí.
 // Completar contacto únicamente con datos confirmados por SmileCorp.
+export const isStaticShowcase = process.env.NEXT_PUBLIC_STATIC_SHOWCASE === 'true';
+export function publicAsset(path: string): string {
+  return `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}${path}`;
+}
 export const siteConfig: {
   name: string;
   professional: string;
@@ -50,7 +54,7 @@ export function treatmentLabel(value: TreatmentInterest): string {
   return treatmentInterests.find(item => item.id === value)!.label;
 }
 export function bookingHref(interest: TreatmentInterest = 'diseno-sonrisa'): string {
-  return `/reservar?interes=${interest}`;
+  return isStaticShowcase ? '#reserva' : `/reservar?interes=${interest}`;
 }
 
 // No habilita cobros. El simulador técnico conserva sus fixtures independientes.
